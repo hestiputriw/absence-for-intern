@@ -38,24 +38,24 @@ Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'AdminController@showDashboard');
 
     Route::group(['prefix' => 'users'], function(){
-        Route::get('/table', 'AdminController@showUsers');
-        Route::get('/validated', 'AdminController@showValidatedUsers');
-        Route::get('/unvalidated', 'AdminController@showUnvalidatedUsers');
+        Route::get('/table', 'AdminUsersController@showUsers');
+        Route::get('/validated', 'AdminUsersController@showValidatedUsers');
+        Route::get('/unvalidated', 'AdminUsersController@showUnvalidatedUsers');
     });
 
     Route::group(['prefix' => 'user'], function(){
-        Route::get('/validate/{id}', 'AdminController@validateUser');
-        Route::get('/unvalidate/{id}', 'AdminController@unvalidateUser');
-        Route::get('/update/{id}', 'AdminController@updateUser');
-        Route::post('/update/{id}', 'AdminController@updateUser');
-        Route::get('/delete/{id}', 'AdminController@deleteUser');
+        Route::get('/validate/{id}', 'AdminUserController@validateUser');
+        Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');
+        Route::get('/update/{id}', 'AdminUserController@updateUser');
+        Route::post('/update/{id}', 'AdminUserController@updateUser');
+        Route::get('/delete/{id}', 'AdminUserController@deleteUser');
     });
 
     Route::group(['prefix' => 'absence'], function(){
-        Route::get('/', 'AdminController@showAbsence');
-        Route::get('/statistic-day', 'AdminController@statisticDay');
-        Route::get('/statistic-month', 'AdminController@statisticMonth');
-        Route::get('/violations', 'AdminController@showViolations');
+        Route::get('/', 'AdminAbsenceController@showAbsence');
+        Route::get('/statistic-day', 'AdminAbsenceController@statisticDay');
+        Route::get('/statistic-month', 'AdminAbsenceController@statisticMonth');
+        Route::get('/violations', 'AdminAbsenceController@showViolations');
     });
 
     Route::get('/logout', 'PublicController@logout');
