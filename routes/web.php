@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/delete/{id}', 'AdminUserController@deleteUser');
     });
 
+    //coba konflik dari Hesti 
+    
     Route::group(['prefix' => 'absence'], function(){
         Route::get('/', 'AdminAbsenceController@showAbsence');
         Route::get('/statistic-day', 'AdminAbsenceController@statisticDay');
