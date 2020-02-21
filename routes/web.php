@@ -21,10 +21,10 @@ Route::post('/register', 'PublicController@register');
 Route::get('/logout', 'PublicController@logout');
 
 //Client
-Route::group(['prefix' => 'user'], function(){
+Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'UserController@showUser');
 
-    Route::group(['prefix' => 'absence'], function(){
+    Route::group(['prefix' => 'absence'], function () {
         Route::get('/in', 'UserController@absenceIn');
         Route::get('/out', 'UserController@absenceOut');
         Route::get('/info', 'UserController@absenceInfo');
@@ -34,16 +34,16 @@ Route::group(['prefix' => 'user'], function(){
 });
 
 //Admin
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@showDashboard');
 
-    Route::group(['prefix' => 'users'], function(){
+    Route::group(['prefix' => 'users'], function () {
         Route::get('/table', 'AdminUsersController@showUsers');
         Route::get('/validated', 'AdminUsersController@showValidatedUsers');
         Route::get('/unvalidated', 'AdminUsersController@showUnvalidatedUsers');
     });
 
-    Route::group(['prefix' => 'user'], function(){
+    Route::group(['prefix' => 'user'], function () {
         Route::get('/validate/{id}', 'AdminUserController@validateUser');
         Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');
         Route::get('/update/{id}', 'AdminUserController@updateUser');
@@ -51,9 +51,9 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('/delete/{id}', 'AdminUserController@deleteUser');
     });
 
-    //coba konflik dari Hesti 
-    
-    Route::group(['prefix' => 'absence'], function(){
+    /// Bariki konflik dari Fathil
+
+    Route::group(['prefix' => 'absence'], function () {
         Route::get('/', 'AdminAbsenceController@showAbsence');
         Route::get('/statistic-day', 'AdminAbsenceController@statisticDay');
         Route::get('/statistic-month', 'AdminAbsenceController@statisticMonth');
@@ -64,10 +64,10 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 //Host
-Route::group(['prefix' => 'host'], function(){
+Route::group(['prefix' => 'host'], function () {
     Route::get('/', 'HostController@showHost');
 
-    Route::group(['prefix' => 'absence'], function(){
+    Route::group(['prefix' => 'absence'], function () {
         Route::get('/in', 'HostController@showAbsenceIn');
         Route::post('/in', 'HostController@absenceIn');
         Route::get('/out', 'HostController@showAbsenceOut');
