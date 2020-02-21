@@ -24,10 +24,10 @@ Route::get('/logout', 'PublicController@logout');
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', 'UserController@showUser');
 
-    Route::group(['prefix' => 'absence'], function () {
-        Route::get('/in', 'UserController@absenceIn');
-        Route::get('/out', 'UserController@absenceOut');
-        Route::get('/info', 'UserController@absenceInfo');
+    Route::group(['prefix' => 'presence'], function () {
+        Route::get('/in', 'UserController@presenceIn');
+        Route::get('/out', 'UserController@presenceOut');
+        Route::get('/info', 'UserController@presenceInfo');
     });
 
     Route::get('/logout', 'PublicController@logout');
@@ -38,13 +38,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@showDashboard');
 
     Route::group(['prefix' => 'users'], function () {
-        Route::get('/table', 'AdminUsersController@showUsers');
+        Route::get('/', 'AdminUsersController@showUsers');
         Route::get('/validated', 'AdminUsersController@showValidatedUsers');
         Route::get('/unvalidated', 'AdminUsersController@showUnvalidatedUsers');
     });
 
     Route::group(['prefix' => 'user'], function () {
-        Route::get('/validate/{id}', 'AdminUserController@validateUser');
+        Route::get('/validate/{id}', 'AdminUserController@showValidateUser');
+        Route::post('/validate/{id}', 'AdminUserController@validateUser');
         Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');
         Route::get('/update/{id}', 'AdminUserController@updateUser');
         Route::post('/update/{id}', 'AdminUserController@updateUser');
@@ -53,11 +54,11 @@ Route::group(['prefix' => 'admin'], function () {
 
     /// Bariki konflik dari Fathil
 
-    Route::group(['prefix' => 'absence'], function () {
-        Route::get('/', 'AdminAbsenceController@showAbsence');
-        Route::get('/statistic-day', 'AdminAbsenceController@statisticDay');
-        Route::get('/statistic-month', 'AdminAbsenceController@statisticMonth');
-        Route::get('/violations', 'AdminAbsenceController@showViolations');
+    Route::group(['prefix' => 'presence'], function () {
+        Route::get('/statistic', 'AdminPresenceController@showAbsence');
+        Route::get('/day', 'AdminPresenceController@statisticDay');
+        Route::get('/violations', 'AdminPresenceController@showViolations');
+        Route::get('/violation-logs', 'AdminPresenceController@showViolationLogs');
     });
 
     Route::get('/logout', 'PublicController@logout');
@@ -67,11 +68,11 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'host'], function () {
     Route::get('/', 'HostController@showHost');
 
-    Route::group(['prefix' => 'absence'], function () {
-        Route::get('/in', 'HostController@showAbsenceIn');
-        Route::post('/in', 'HostController@absenceIn');
-        Route::get('/out', 'HostController@showAbsenceOut');
-        Route::post('/out', 'HostController@absenceOut');
+    Route::group(['prefix' => 'presence'], function () {
+        Route::get('/in', 'HostController@showPresenceIn');
+        Route::post('/in', 'HostController@presenceIn');
+        Route::get('/out', 'HostController@showPresenceOut');
+        Route::post('/out', 'HostController@presenceOut');
     });
 
     Route::get('/logout', 'PublicController@logout');
