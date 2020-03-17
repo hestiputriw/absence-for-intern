@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersPresenceCodeTable extends Migration
+class CreateUsersPresenceCodesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUsersPresenceCodeTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_presence_code', function (Blueprint $table) {
+        Schema::create('users_presence_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

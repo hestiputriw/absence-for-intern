@@ -11,8 +11,6 @@
 |
 */
 
-
-
 //Public
 Route::get('/', 'PublicController@showLogin');
 Route::post('/', 'PublicController@login');
@@ -30,6 +28,7 @@ Route::group(['prefix' => 'user'], function () {
         Route::get('/info', 'UserController@presenceInfo');
     });
 
+    Route::get('/profile', 'PublicController@showProfile');
     Route::get('/logout', 'PublicController@logout');
 });
 
@@ -44,10 +43,11 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'user'], function () {
+        Route::get('/', 'AdminUserController@showUser');
         Route::get('/validate/{id}', 'AdminUserController@showValidateUser');
         Route::post('/validate/{id}', 'AdminUserController@validateUser');
         Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');
-        Route::get('/update/{id}', 'AdminUserController@updateUser');
+        Route::get('/update/{id}', 'AdminUserController@showUpdateUser');
         Route::post('/update/{id}', 'AdminUserController@updateUser');
         Route::get('/delete/{id}', 'AdminUserController@deleteUser');
     });
@@ -55,9 +55,12 @@ Route::group(['prefix' => 'admin'], function () {
     /// Bariki konflik dari Fathil
 
     Route::group(['prefix' => 'presence'], function () {
-        Route::get('/statistic', 'AdminPresenceController@showAbsence');
+        Route::get('/', 'AdminPresenceController@showPresence');
+        Route::get('/statistic', 'AdminPresenceController@showStatistic');
         Route::get('/day', 'AdminPresenceController@statisticDay');
         Route::get('/violations', 'AdminPresenceController@showViolations');
+        Route::get('/violations/access', 'AdminPresenceController@showAccess');
+        Route::post('/violations/access', 'AdminPresenceController@access');
         Route::get('/violation-logs', 'AdminPresenceController@showViolationLogs');
     });
 
