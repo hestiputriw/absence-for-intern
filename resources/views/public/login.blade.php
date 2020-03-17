@@ -6,16 +6,16 @@
         <div class="register-card">
             <h3 class="title">Welcome</h3>
             <form class="register-form">
-                <label>Email</label>
-                <input type="text" class="form-control" placeholder="Email" id="email" name="email">
+                <label>Username</label>
+                <input type="text" class="form-control" placeholder="username" id="username" name="username">
 
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="Password" id="password" name="password">
                 <a href="{{ url("user") }}" class="btn btn-info btn-fill btn-block">Login</a>
             </form>
-            {{-- <div class="forgot">
-                <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
-            </div> --}}
+            <div class="forgot">
+                <a href="{{ url("register") }}" class="btn btn-danger btn-fill btn-block">Register</a>
+            </div>
         </div>
     </div>
 @endsection
