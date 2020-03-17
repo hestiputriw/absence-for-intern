@@ -80,3 +80,7 @@ Route::group(['prefix' => 'host'], function () {
 
     Route::get('/logout', 'PublicController@logout');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
