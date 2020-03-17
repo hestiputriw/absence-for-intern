@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
@@ -20,7 +21,6 @@
 <body class="">
     <div class="wrapper ">
         <div class="sidebar" data-color="black" data-active-color="danger">
-        <!--Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"-->
             <div class="logo">
                 <a href="{{ url("admin") }}" class="simple-text logo-mini">
                     <div class="logo-image-small">
@@ -35,7 +35,7 @@
                 <ul class="nav">
                     <li class="@if(request()->is('admin')) active @endif">
                         <a href="{{ url("admin") }}">
-                            <i class="fa fa-home"></i>                            
+                            <i class="fa fa-home"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
@@ -133,22 +133,23 @@
                         </div>
                         <a class="navbar-brand" href="{{ url("admin") }}">Dashboard</a>
                     </div>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                     </button>
-                {{-- Search --}}
+                    {{-- Search --}}
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <form>
-                        <div class="input-group no-border">
-                            <input type="text" value="" class="form-control" placeholder="Search...">
-                            <div class="input-group-append">
-                            <div class="input-group-text">
-                                <i class="nc-icon nc-zoom-split"></i>
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="nc-icon nc-zoom-split"></i>
+                                    </div>
+                                </div>
                             </div>
-                            </div>
-                        </div>
                         </form>
                         <ul class="navbar-nav">
                             {{-- <li class="nav-item btn-rotate dropdown">
@@ -174,7 +175,7 @@
                 </div>
             </nav>
             <!-- End Navbar -->
-    
+
             <div class="content">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -190,7 +191,7 @@
                                         <div class="numbers">
                                             <p class="card-category">Capacity</p>
                                             <p class="card-title">150GB
-                                            <p>
+                                                <p>
                                         </div>
                                     </div>
                                 </div>
@@ -216,7 +217,7 @@
                                         <div class="numbers">
                                             <p class="card-category">Revenue</p>
                                             <p class="card-title">$ 1,345
-                                            <p>
+                                                <p>
                                         </div>
                                     </div>
                                 </div>
@@ -242,7 +243,7 @@
                                         <div class="numbers">
                                             <p class="card-category">Errors</p>
                                             <p class="card-title">23
-                                            <p>
+                                                <p>
                                         </div>
                                     </div>
                                 </div>
@@ -268,7 +269,7 @@
                                         <div class="numbers">
                                             <p class="card-category">Followers</p>
                                             <p class="card-title">+45K
-                                            <p>
+                                                <p>
                                         </div>
                                     </div>
                                 </div>

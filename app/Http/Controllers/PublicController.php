@@ -23,6 +23,7 @@ class PublicController extends Controller
     }
 
     public function logout(){
-        
+        request()->session()->flush();
+        return redirect('/');
     }
 }

@@ -46,4 +46,22 @@ class LoginController extends Controller
     {
         return 'username';
     }
+
+    public function redirectTo(){
+        // User role
+        $role = auth()->user()->role; 
+        
+        // Check user role
+        switch ($role) {
+            case 'admin':
+                    return '/admin';
+                break;
+            case 'host':
+                    return '/host';
+                break; 
+            default:
+                    return '/user'; 
+                break;
+        }
+    }
 }
