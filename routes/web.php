@@ -82,5 +82,6 @@ Route::group(['prefix' => 'host'], function () {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/', 'Auth\LoginController@login');
+// Route::get('/home', 'HomeController@index')->name('home');
