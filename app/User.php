@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'validated'
     ];
 
     /**
@@ -57,11 +57,12 @@ class User extends Authenticatable
     {
         $user_logs = $this->presences();
         $workHour = 0;
-        
+
         foreach ($user_logs as $user_log) {
             $start = Carbon::parse($user_log->time_in);
             $end = Carbon::parse($user_log->time_out);
-            $workHour += $end->diffInHours($start);;
+            $workHour += $end->diffInHours($start);
+            ;
         }
         return $workHour;
     }
@@ -70,7 +71,7 @@ class User extends Authenticatable
     {
         $user_logs = $this->presences();
         $workDay = 0;
-        
+
         foreach ($user_logs as $user_log) {
             $workDay += 1;
         }
@@ -92,7 +93,7 @@ class User extends Authenticatable
         $workHour = $this->workHour();
         $totalHour = $this->totalDay()*8;
 
-        $hourPercen = ($workHour/$totalHour)*100; 
+        $hourPercen = ($workHour/$totalHour)*100;
         return $hourPercen;
     }
 
@@ -109,7 +110,7 @@ class User extends Authenticatable
     {
         $user_logs = $this->presences();
         $violation = 0;
-        
+
         foreach ($user_logs as $user_log) {
             $violation += 1;
         }

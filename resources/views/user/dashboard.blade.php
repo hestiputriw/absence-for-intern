@@ -7,7 +7,7 @@
         <div class="container tim-container">
             <div class="motto">
                 <h1 class="title-uppercase">Hello, </h1>
-                <h3>Username!</h3>
+                <h3>{{ Auth::user()->name }}</h3>
             </div>
         </div>
     </div>

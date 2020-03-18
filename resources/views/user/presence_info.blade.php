@@ -11,8 +11,8 @@
                     <div class="text-center">
                         <div class="col">
                             <p>
-                                Hesti Putri Winasih<br>
-                                <i class="fa fa-university"></i> Universitas Dian Nuswantoro
+                                {{ Auth::user()->name }}<br>
+                                <i class="fa fa-university"></i> {{ Auth::user()->institute }}
                             </p>
                         </div>
                     </div>

@@ -19,7 +19,7 @@ Route::post('/register', 'PublicController@register');
 Route::get('/logout', 'PublicController@logout');
 
 //Client
-Route::group(['prefix' => 'user'], function () {
+Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
     Route::get('/', 'UserController@showUser');
 
     Route::group(['prefix' => 'presence'], function () {
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'user'], function () {
 });
 
 //Admin
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('/', 'AdminController@showDashboard');
 
     Route::group(['prefix' => 'users'], function () {
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 //Host
-Route::group(['prefix' => 'host'], function () {
+Route::group(['prefix' => 'host', 'middleware' => 'host'], function () {
     Route::get('/', 'HostController@showHost');
 
     Route::group(['prefix' => 'presence'], function () {
