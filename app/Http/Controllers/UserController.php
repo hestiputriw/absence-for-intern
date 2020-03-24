@@ -9,36 +9,50 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function showUser(){
+    public function showUser()
+    {
         return view('user/dashboard');
     }
 
-    public function showPresenceIn(){
+    public function showPresenceIn()
+    {
         return view('user/presence_in');
     }
 
-    public function presenceIn(Request $request){
+    public function presenceIn(Request $request)
+    {
         $request->validate([
             'code'  => 'required|min:4|max:8'
-        ]);        
+        ]);
 
-        if($request->code == '123123')
-        {
-            $presence = new PresenceLog;
-            $presence->user_id = Auth::user()->id;
-            $presence->time_in = Carbon::now();
+        if ($request->code == '123123') {
+            /// Check If Log is Exist
+            $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
+            ->whereDate('time_in', Carbon::today())
+            ->first();
 
-            if($presence->save()){
+            if (!$checkPresence) {
+                /// Create Presence Log
+                $presence = new PresenceLog;
+                $presence->user_id = Auth::user()->id;
+                $presence->time_in = Carbon::now();
+
+                if ($presence->save()) {
+                    return redirect('user');
+                }
+            } else {
                 return redirect('user');
             }
         }
     }
 
-    public function presenceOut(){
+    public function presenceOut()
+    {
         return view('user/presence_out');
     }
 
-    public function presenceInfo(){
+    public function presenceInfo()
+    {
         return view('user/presence_info');
     }
 }
