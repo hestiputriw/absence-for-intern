@@ -20,7 +20,7 @@ class CreatePresenceLogsTable extends Migration
                   ->references('id')->on('users')
                   ->onDelete('cascade');
             $table->dateTime('time_in');
-            $table->dateTime('time_out');
+            $table->dateTime('time_out')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

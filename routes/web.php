@@ -13,7 +13,6 @@
 
 //Public
 Route::get('/', 'PublicController@showLogin');
-Route::post('/', 'PublicController@login');
 Route::get('/register', 'PublicController@showRegister');
 Route::post('/register', 'PublicController@register');
 Route::get('/logout', 'PublicController@logout');
@@ -23,8 +22,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
     Route::get('/', 'UserController@showUser');
 
     Route::group(['prefix' => 'presence'], function () {
-        Route::get('/in', 'UserController@presenceIn');
-        Route::get('/out', 'UserController@presenceOut');
+        Route::get('/in', 'UserController@showPresenceIn');
+        Route::post('/in', 'UserController@presenceIn');
+        Route::get('/out', 'UserController@showPresenceOut');
+        Route::post('/out', 'UserController@presenceOut');
         Route::get('/info', 'UserController@presenceInfo');
     });
 
@@ -43,7 +44,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     });
 
     Route::group(['prefix' => 'user'], function () {
-        Route::get('/', 'AdminUserController@showUser');
         Route::get('/validate/{id}', 'AdminUserController@showValidateUser');
         Route::post('/validate/{id}', 'AdminUserController@validateUser');
         Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');

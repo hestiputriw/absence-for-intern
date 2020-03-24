@@ -39,12 +39,6 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
-                    <li class="@if(request()->is('admin/user')) active  @endif">
-                        <a href="{{ url("admin/user") }}">
-                            <i class="fa fa-user"></i>
-                            <p>User</p>
-                        </a>
-                    </li>
                     <li class="@if(request()->is('admin/users')) active  @endif">
                         <a href="#users" data-toggle="collapse">
                             <i class="fa fa-address-book"></i>

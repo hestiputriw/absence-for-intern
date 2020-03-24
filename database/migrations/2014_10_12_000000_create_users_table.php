@@ -18,13 +18,13 @@ class CreateUsersTable extends Migration
             $table->enum('role', ['admin', 'host', 'user']);
             $table->boolean('validated');
             $table->string('name');
-            $table->string('username', 20)->unique();
+            $table->string('username', 50)->unique();
             $table->string('email')->unique();
             $table->string('password');
             $table->string('institute', 100);
             $table->string('address', 255);
             $table->string('phone', 15);
-            $table->dateTime('start_working_date');
+            $table->dateTime('start_working_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
