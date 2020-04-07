@@ -92,12 +92,24 @@ class UserController extends Controller
         if ($request->isDirty('name')) {
             $user->name = $request->name;
         }
-        $user->username     = $request->username;
-        $user->email        = $request->email;
-        $user->password     = Hash::make($request->password);
-        $user->institute    = $request->institute;
-        $user->address      = $request->address;
-        $user->phone        = $request->phone;
+        if ($request->isDirty('username')) {
+            $user->username = $request->username;
+        }
+        if ($request->isDirty('email')) {
+            $user->email = $request->email;
+        }
+        if ($request->isDirty('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        if ($request->isDirty('institute')) {
+            $user->institute = $request->institute;
+        }
+        if ($request->isDirty('address')) {
+            $user->address = $request->address;
+        }
+        if ($request->isDirty('phone')) {
+            $user->phone = $request->phone;
+        }
 
         if ($user->save()) {
             return redirect()->back()->with('message', 'Your`e Update was Successfully!');

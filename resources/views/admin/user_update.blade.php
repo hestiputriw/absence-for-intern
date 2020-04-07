@@ -8,7 +8,7 @@
                 <h5 class="card-title">Update User Profile </h5>
             </div>
             <div class="card-body">
-                <form action="{{url('admin/user/update/{id}')}}" method="POST">
+                <form action="{{ url('admin/user/update/') + "/" + $id }}" method="POST">
                     @method('patch')
                     @csrf
                     <div class="row">
@@ -21,7 +21,7 @@
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" class="form-control" value="{{ Auth::user()->username }}">
+                                <input type="text" class="form-control" value="{{ $user->username }}">
                             </div>
                         </div>
                         <div class="col-md-5 pl-1">
