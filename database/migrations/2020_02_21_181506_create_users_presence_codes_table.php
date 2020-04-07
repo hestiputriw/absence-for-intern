@@ -15,10 +15,6 @@ class CreateUsersPresenceCodesTable extends Migration
     {
         Schema::create('users_presence_codes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade');
             $table->string('code', 6);
             $table->timestamps();
             $table->softDeletes();

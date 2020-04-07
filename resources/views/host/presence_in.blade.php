@@ -2,5 +2,5 @@
 @section('title', 'Presence In')
 
 @section('content')
-
+ {{ $randomletter }}
 @endsection

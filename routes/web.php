@@ -76,9 +76,7 @@ Route::group(['prefix' => 'host', 'middleware' => 'host'], function () {
 
     Route::group(['prefix' => 'presence'], function () {
         Route::get('/in', 'HostController@showPresenceIn');
-        Route::post('/in', 'HostController@presenceIn');
         Route::get('/out', 'HostController@showPresenceOut');
-        Route::post('/out', 'HostController@presenceOut');
     });
 
     Route::get('/logout', 'PublicController@logout');

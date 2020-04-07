@@ -53,6 +53,7 @@
                 <div class="container tim-container">
                     <div class="row justify-content-md-center">
                         <div class="col-md-4 col-md-offset-4 text-center">
+                            @yield('content')
                             <img src="{{ asset('img/qrcode.png') }}" alt="Rounded Image" class="img-rounded img-responsive">
                         </div>
                     </div>

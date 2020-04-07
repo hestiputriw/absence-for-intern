@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\UsersPresenceCode;
 
 class UserController extends Controller
 {
@@ -27,7 +28,12 @@ class UserController extends Controller
             'code'  => 'required|min:4|max:8'
         ]);
 
-        if ($request->code == '123123') {
+        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(10))->first();
+
+        if ($checkcode != null) {
+            //Cek apakah kemarin sudah presence out!
+
+
             /// Check If Log is Exist
             $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
             ->whereDate('time_in', Carbon::today())
