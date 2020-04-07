@@ -8,7 +8,7 @@
         <form method="POST" action="/">
             @csrf
             <label>Username</label>
-            <input type=" text" class="form-control" placeholder="username" id="username" name="username"
+            <input type=" text" class="form-control color-text" placeholder="username" id="username" name="username"
                 value="{{ old('username') }}">
             @error('username')
             <span class="invalid-feedback" role="alert">

@@ -3,3 +3,61 @@
     flex-wrap: wrap;
     justify-content: center !important;
 }
+
+.color-text{
+    color: #0f0050;
+}
+
+.card-profile{
+    min-height: 240px;
+    border-radius: 12px;
+    background-color: rgb(78, 155, 245);
+    color: cornsilk;
+    padding: 40px;
+    margin: 30px;
+}
+
+.btn-top{
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center !important;
+}
+
+.top{
+    margin-bottom: 10px;
+}
+
+.mtom{
+    margin-bottom: 0px;
+}
+
+.mtop{
+    margin-top: 0px;
+}
+
+.row-profile{
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.owner-profile .avatar {
+    margin-top: -85px;
+    padding: 15px;
+    padding-bottom: 0px;
+    position: relative;
+    z-index: 3;
+}
+
+.owner-profile .name h4 {
+    margin-top: 0px;
+}
+
+.table-mar{
+    text-align: left;
+}
+
+.decor{
+    text-decoration: none;
+}

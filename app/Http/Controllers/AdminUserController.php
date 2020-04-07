@@ -30,11 +30,14 @@ class AdminUserController extends Controller
 
     public function showUpdateUser($id)
     {
-        return view('admin/user_update');
+        $users = User::all()->where('id', $id);
+
+        return view('admin/user_update')->with(compact('users'));
     }
 
     public function updateUser($id)
     {
+        
     }
 
     public function deleteUser($id)

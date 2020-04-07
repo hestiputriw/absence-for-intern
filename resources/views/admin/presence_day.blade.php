@@ -18,13 +18,17 @@
                                 <th>Presence Out</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>
-                                </tr>
+                                @foreach ($users as $key => $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                @endforeach
+                                @foreach ($presences as $key => $presence)
+                                        <td>{{ $presence->time_in }}</td>
+                                        <td> </td>
+                                        {{-- <td>{{ $presence->time_out }}</td> --}}
+                                    </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

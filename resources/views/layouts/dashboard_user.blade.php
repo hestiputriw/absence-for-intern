@@ -11,6 +11,7 @@
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/examples.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/dashboard-custom.css') }}" rel="stylesheet" />
+    
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -46,7 +47,10 @@
                         <a href="{{ url("user/presence/info") }}" class="btn btn-simple">Info</a>
                     </li>
                     <li>
-                        <a href="{{ url("logout") }}" class="btn btn-simple">Logout</a>
+                        <a href="{{ url("user/profile") }}" class="btn btn-simple">Profile</a>
+                    </li>
+                    <li>
+                        <a href="{{ url("logout") }}" class="btn btn-fill btn-danger">Logout</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

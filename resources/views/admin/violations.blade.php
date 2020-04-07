@@ -17,13 +17,15 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
-                                    </td>
-                                </tr>
+                                @foreach ($users as $key => $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

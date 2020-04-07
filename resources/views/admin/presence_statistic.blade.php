@@ -19,14 +19,15 @@
                                 <th>Violations</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>
-                                    <td>Oud-Turnhout</td>
-                                </tr>
+                                @foreach ($users as $key => $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td> </td>
+                                        <td> </td>
+                                        <td> </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -33,17 +33,20 @@
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table">
-                                        <thead class=" text-primary">
+                                        <thead class="text-primary">
                                             <th>#</th>
                                             <th>Presence In</th>
                                             <th>Presence Out</th>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="table-mar">
+                                            @foreach ($presences as $key => $presence)
                                             <tr>
-                                                <td>D</td>
-                                                <td>D</td>
-                                                <td>D</td>
+                                                <td>{{ $key+1 }}</td>
+                                                <td>{{ $presence->time_in }}</td>
+                                                <td> </td>
+                                                {{-- <td>{{ $presence->time_out }}</td> --}}
                                             </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>

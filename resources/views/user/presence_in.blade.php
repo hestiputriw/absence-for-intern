@@ -7,6 +7,12 @@
             <div class="section text-center landing-section">
                 <div class="container tim-container">
                     <div class="row">
+                        @if (session('message'))
+                            <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                <strong> {{ session('message') }} </strong>
+                            </div>
+                        @endif
                         <div class="col-md-8 col-md-offset-2 text-center">
                             <h2>Scan QR Code</h2>
                         </div>

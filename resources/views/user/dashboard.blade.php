@@ -6,8 +6,16 @@
     <div class="landing-header" style="background-image: url('../img/background.png');">
         <div class="container tim-container">
             <div class="motto">
-                <h1 class="title-uppercase">Hello, </h1>
-                <h3>{{ Auth::user()->name }}</h3>
+                <h1 class="title-uppercase mtom">Hello, </h1>
+                <h3 class="mtop"> {{ Auth::user()->name }} !</h3>
+            </div>
+            <div class="row">
+                @if (session('message'))
+                    <div class="alert alert-success alert-dismissable custom-success-box" style="margin: 15px;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong> {{ session('message') }} </strong>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

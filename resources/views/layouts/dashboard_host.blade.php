@@ -35,9 +35,12 @@
             <div class="collapse navbar-collapse" id="navigation-example-2">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-nav navbar-right">
-                        <a href="{{ url("host") }}" target="_blank" class="btn btn-danger btn-fill">
-                            Time
-                        </a>
+                        <p class="text-danger">
+                            <?php
+                                date_default_timezone_set("Asia/Jakarta");
+                                echo date("d-m-Y h:i:s");
+                            ?>
+                        </p>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->

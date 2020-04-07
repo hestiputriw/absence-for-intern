@@ -8,7 +8,9 @@
                 <h5 class="card-title">Update User Profile </h5>
             </div>
             <div class="card-body">
-                <form>
+                <form action="{{url('admin/user/update/{id}')}}" method="POST">
+                    @method('patch')
+                    @csrf
                     <div class="row">
                         <div class="col-md-3 pr-1">
                             <div class="form-group">
@@ -19,13 +21,13 @@
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" class="form-control" placeholder="Username">
+                                <input type="text" class="form-control" value="{{ Auth::user()->username }}">
                             </div>
                         </div>
                         <div class="col-md-5 pl-1">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" placeholder="Email">
+                                <label for="exampleInputEmail1">Email</label>
+                                <input type="email" class="form-control" value="{{ Auth::user()->email }}">
                             </div>
                         </div>
                     </div>
@@ -33,7 +35,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Full Name</label>
-                                <input type="text" class="form-control" placeholder="Full Name">
+                                <input type="text" class="form-control" value="{{ Auth::user()->name }}">
                             </div>
                         </div>
                     </div>
@@ -41,7 +43,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Address</label>
-                                <input type="text" class="form-control" placeholder="Home Address">
+                                <input type="text" class="form-control" value="{{ Auth::user()->address }}">
                             </div>
                         </div>
                     </div>
@@ -49,13 +51,13 @@
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label>Phone Number</label>
-                                <input type="text" class="form-control" placeholder="Phone Number">
+                                <input type="text" class="form-control" value="{{ Auth::user()->phone }}">
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
                             <div class="form-group">
                                 <label>Institute</label>
-                                <input type="text" class="form-control" placeholder="Institute">
+                                <input type="text" class="form-control" value="{{ Auth::user()->institute }}">
                             </div>
                         </div>
                     </div>

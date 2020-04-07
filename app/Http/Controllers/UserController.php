@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\PresenceLog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\User;
 
 class UserController extends Controller
 {
@@ -38,21 +40,75 @@ class UserController extends Controller
                 $presence->time_in = Carbon::now();
 
                 if ($presence->save()) {
-                    return redirect('user');
+                    return redirect('user')->with('message', 'Your`e Presence was Successfully!');
+                    // return redirect('user');
                 }
-            } else {
-                return redirect('user');
+            } 
+            else {
+                return redirect('user')->with('message', 'You already have a presence today!');
             }
+        }
+        else {
+            return redirect()->back()->with('message', 'Your`e Code not match!');
         }
     }
 
-    public function presenceOut()
+    public function showPresenceOut()
     {
         return view('user/presence_out');
     }
 
+    public function presenceOut()
+    {
+
+    }
+
+    public function showProfile()
+    {
+        return view('user/profile');
+    }
+
+    public function profile()
+    {
+
+    }
+
+    public function showUpdateProfile(User $user)
+    {
+        $user = Auth::user();
+        return view('user/profile_update', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = Auth::user();
+        $request->validate([
+            'name'      => 'required|min:5|max:255',
+            'username'  => 'required|min:8|max:50|unique:users,username',
+            'email'     => 'required|min:5|max:255|email:rfc|unique:users,email',
+            'password'  => 'required|min:5|max:15',
+            'institute' => 'min:5|max:100',
+            'address'   => 'min:5|max:255',
+            'phone'     => 'required|min:9|max:15'
+        ]);
+
+        $user->name         = $request->name; 
+        $user->username     = $request->username; 
+        $user->email        = $request->email; 
+        $user->password     = Hash::make($request->password); 
+        $user->institute    = $request->institute; 
+        $user->address      = $request->address; 
+        $user->phone        = $request->phone; 
+
+        if($user->save()){
+            return redirect()->back()->with('message', 'Your`e Update was Successfully!');
+        }
+    }
+
     public function presenceInfo()
     {
-        return view('user/presence_info');
+        $presences = PresenceLog::all();
+
+        return view('user/presence_info')->with(compact('presences'));
     }
 }

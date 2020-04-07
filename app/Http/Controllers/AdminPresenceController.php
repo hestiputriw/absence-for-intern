@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\PresenceLog;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminPresenceController extends Controller
 {
@@ -11,15 +15,26 @@ class AdminPresenceController extends Controller
     }
 
     public function showStatistic(){
-        return view('admin/presence_statistic');
+        $users = User::all();
+
+        return view('admin/presence_statistic')->with(compact('users'));
     }
 
     public function statisticDay(){
-        return view('admin/presence_day');
+        $users = User::all()->where('role', 'user');
+        $presences = PresenceLog::all()->where('time_in', Carbon::now());
+
+        return view('admin/presence_day')->with(compact('users', 'presences'));
     }
 
     public function showViolations(){
-        return view('admin/violations');
+        $users = DB::table('users')
+                ->join('presence_logs', function ($join) {
+                    $join->on('users.id', '=', 'presence_logs.user_id')
+                        ->where('presence_logs.time_in', '!=', Carbon::now());
+                })
+                ->get();
+        return view('admin/violations')->with(compact('users'));
     }
 
     public function showViolationLogs(){

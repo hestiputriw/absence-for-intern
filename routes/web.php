@@ -29,7 +29,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
         Route::get('/info', 'UserController@presenceInfo');
     });
 
-    Route::get('/profile', 'PublicController@showProfile');
+    Route::get('/profile', 'UserController@showProfile');
+    Route::post('/profile', 'UserController@profile');
+    Route::get('profile/update', 'UserController@ShowUpdateProfile');
+    Route::patch('profile/update', 'UserController@updateProfile');
     Route::get('/logout', 'PublicController@logout');
 });
 
