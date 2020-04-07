@@ -90,7 +90,7 @@ class UserController extends Controller
         ]);
 
         if ($request->isDirty('name')) {
-            $user->name         = $request->name;
+            $user->name = $request->name;
         }
         $user->username     = $request->username;
         $user->email        = $request->email;
