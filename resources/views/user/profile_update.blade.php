@@ -56,8 +56,8 @@
                             </div>
                             <div class="col-md-4">
                                 <label>Username</label>
-                                <input type="text" class="form-control color-text top" value="" name="username"
-                                    placeholder="{{ Auth::user()->username }}">
+                                <input type="text" class="form-control color-text top" name="username"
+                                    value="{{ Auth::user()->username }}" placeholder="Username">
                                 @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -69,8 +69,8 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <label>Email</label>
-                                <input type="text" class="form-control color-text top"
-                                    placeholder="{{ Auth::user()->email }}" name="email">
+                                <input type="text" class="form-control color-text top" value="{{ Auth::user()->email }}"
+                                    name="email" placeholder="Email">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
