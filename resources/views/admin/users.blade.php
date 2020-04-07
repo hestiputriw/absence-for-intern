@@ -30,11 +30,11 @@
                                 <td>{{ $user->address }}</td>
                                 <td>{{ $user->institute }}</td>
                                 <td>
-                                    <a href="{{ url("admin/users/update/") + "/" + $user->id  }}">
+                                    <a href="{{ url("admin/user/update/") . "/" . $user->id  }}">
                                         <i class="fa fa-pencil-square text-primary fa-2x"></i>
                                     </a>
                                     &emsp;
-                                    <a href="{{ url("admin/users/delete/") + "/" + $user->id  }}">
+                                    <a href="{{ url("admin/user/delete/") . "/" . $user->id  }}">
                                         <i class="fa fa-trash text-primary fa-2x"></i>
                                     </a>
                                 </td>

@@ -30,9 +30,9 @@ class AdminUserController extends Controller
 
     public function showUpdateUser($id)
     {
-        $users = User::findOrFail($id);
-
-        return view('admin/user_update', compact('users'));
+        $user = User::findOrFail($id);
+        
+        return view('admin/user_update', compact('user'));
     }
 
     public function updateUser($id, Request $request)
@@ -41,9 +41,8 @@ class AdminUserController extends Controller
 
         $request->validate([
             'name'      => 'required|min:5|max:255',
-            'username'  => 'nullable|min:8|max:50|unique:users,username,' . $user->id,
-            'email'     => 'nullable|min:5|max:255|email:rfc|unique:users,email,' . $user->id,
-            'password'  => 'nullable|min:5|max:15',
+            'username'  => 'required|min:8|max:50|unique:users,username,' . $user->id,
+            'email'     => 'required|min:5|max:255|email:rfc|unique:users,email,' . $user->id,
             'institute' => 'min:5|max:100',
             'address'   => 'min:5|max:255',
             'phone'     => 'required|min:9|max:15'
@@ -57,9 +56,6 @@ class AdminUserController extends Controller
         }
         if ($request->email != $user->email) {
             $user->email = $request->email;
-        }
-        if ($request->password != $user->password) {
-            $user->password = Hash::make($request->password);
         }
         if ($request->institute != $user->institute) {
             $user->institute = $request->institute;

@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::post('/validate/{id}', 'AdminUserController@validateUser');
         Route::get('/unvalidate/{id}', 'AdminUserController@unvalidateUser');
         Route::get('/update/{id}', 'AdminUserController@showUpdateUser');
-        Route::post('/update/{id}', 'AdminUserController@updateUser');
+        Route::patch('/update/{id}', 'AdminUserController@updateUser');
         Route::get('/delete/{id}', 'AdminUserController@deleteUser');
     });
 
