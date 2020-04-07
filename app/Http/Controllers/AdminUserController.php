@@ -35,39 +35,39 @@ class AdminUserController extends Controller
         return view('admin/user_update', compact('users'));
     }
 
-    public function updateUser($id)
+    public function updateUser($id, Request $request)
     {
         $user = User::findOrFail($id);
 
         $request->validate([
             'name'      => 'required|min:5|max:255',
-            'username'  => 'nullable|min:8|max:50|unique:users,username',
-            'email'     => 'required|min:5|max:255|email:rfc|unique:users,email',
+            'username'  => 'nullable|min:8|max:50|unique:users,username,' . $user->id,
+            'email'     => 'nullable|min:5|max:255|email:rfc|unique:users,email,' . $user->id,
             'password'  => 'nullable|min:5|max:15',
             'institute' => 'min:5|max:100',
             'address'   => 'min:5|max:255',
             'phone'     => 'required|min:9|max:15'
         ]);
 
-        if ($request->isDirty('name')) {
+        if ($request->name != $user->name) {
             $user->name = $request->name;
         }
-        if ($request->isDirty('username')) {
+        if ($request->username != $user->username) {
             $user->username = $request->username;
         }
-        if ($request->isDirty('email')) {
+        if ($request->email != $user->email) {
             $user->email = $request->email;
         }
-        if ($request->isDirty('password')) {
+        if ($request->password != $user->password) {
             $user->password = Hash::make($request->password);
         }
-        if ($request->isDirty('institute')) {
+        if ($request->institute != $user->institute) {
             $user->institute = $request->institute;
         }
-        if ($request->isDirty('address')) {
+        if ($request->address != $user->address) {
             $user->address = $request->address;
         }
-        if ($request->isDirty('phone')) {
+        if ($request->phone != $user->phone) {
             $user->phone = $request->phone;
         }
 
