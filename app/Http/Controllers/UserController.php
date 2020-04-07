@@ -43,12 +43,10 @@ class UserController extends Controller
                     return redirect('user')->with('message', 'Your`e Presence was Successfully!');
                     // return redirect('user');
                 }
-            } 
-            else {
+            } else {
                 return redirect('user')->with('message', 'You already have a presence today!');
             }
-        }
-        else {
+        } else {
             return redirect()->back()->with('message', 'Your`e Code not match!');
         }
     }
@@ -60,7 +58,6 @@ class UserController extends Controller
 
     public function presenceOut()
     {
-
     }
 
     public function showProfile()
@@ -70,7 +67,6 @@ class UserController extends Controller
 
     public function profile()
     {
-
     }
 
     public function showUpdateProfile(User $user)
@@ -82,25 +78,28 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
+
         $request->validate([
             'name'      => 'required|min:5|max:255',
-            'username'  => 'required|min:8|max:50|unique:users,username',
+            'username'  => 'nullable|min:8|max:50|unique:users,username',
             'email'     => 'required|min:5|max:255|email:rfc|unique:users,email',
-            'password'  => 'required|min:5|max:15',
+            'password'  => 'nullable|min:5|max:15',
             'institute' => 'min:5|max:100',
             'address'   => 'min:5|max:255',
             'phone'     => 'required|min:9|max:15'
         ]);
 
-        $user->name         = $request->name; 
-        $user->username     = $request->username; 
-        $user->email        = $request->email; 
-        $user->password     = Hash::make($request->password); 
-        $user->institute    = $request->institute; 
-        $user->address      = $request->address; 
-        $user->phone        = $request->phone; 
+        if ($request->isDirty('name')) {
+            $user->name         = $request->name;
+        }
+        $user->username     = $request->username;
+        $user->email        = $request->email;
+        $user->password     = Hash::make($request->password);
+        $user->institute    = $request->institute;
+        $user->address      = $request->address;
+        $user->phone        = $request->phone;
 
-        if($user->save()){
+        if ($user->save()) {
             return redirect()->back()->with('message', 'Your`e Update was Successfully!');
         }
     }
