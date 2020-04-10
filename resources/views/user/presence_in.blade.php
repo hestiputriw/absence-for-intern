@@ -48,7 +48,7 @@
 <script>
     var args = {
         frameRate: 25,
-        DecodeQRCodeRate: 5,
+        DecodeQRCodeRate: 2,
         flipHorizontal: true,
         beep: 'http://192.168.1.9:8000/sound/beep.mp3',
         autoBrightnessValue: 0,
@@ -59,9 +59,8 @@
         height: 240,
         threshold: 500,
         resultFunction: function(result) {
-            alert(result.code)
-            // $('#code').val(result.code)
-            // $('#submit').click()
+            $('#code').val(result.code)
+            $('#submit').click()
             }
         };
         var decoder = $("canvas").WebCodeCamJQuery(args).data().plugin_WebCodeCamJQuery;
