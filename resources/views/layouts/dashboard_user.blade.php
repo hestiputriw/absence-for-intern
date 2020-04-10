@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
@@ -11,7 +12,7 @@
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/examples.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/dashboard-custom.css') }}" rel="stylesheet" />
-    
+
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -87,5 +88,6 @@
 <script src="{{ asset('js/bootstrap-select.js') }}"></script>
 <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('js/ct-paper.js') }}"></script>
+@yield('js')
 
 </html>
