@@ -62,7 +62,6 @@ class User extends Authenticatable
             $start = Carbon::parse($user_log->time_in);
             $end = Carbon::parse($user_log->time_out);
             $workHour += $end->diffInHours($start);
-            ;
         }
         return $workHour;
     }

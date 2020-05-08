@@ -28,32 +28,38 @@ class UserController extends Controller
             'code'  => 'required|min:4|max:8'
         ]);
 
-        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(10))->first();
+        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
 
-        if ($checkcode != null) {
-            //Cek apakah kemarin sudah presence out!
+        $checkValid = PresenceLog::where('user_id', Auth::user()->id)
+            ->whereDate('time_out', Carbon::yesterday());
 
-
-            /// Check If Log is Exist
-            $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
-            ->whereDate('time_in', Carbon::today())
-            ->first();
-
-            if (!$checkPresence) {
-                /// Create Presence Log
-                $presence = new PresenceLog;
-                $presence->user_id = Auth::user()->id;
-                $presence->time_in = Carbon::now();
-
-                if ($presence->save()) {
-                    return redirect('user')->with('message', 'Your`e Presence was Successfully!');
-                    // return redirect('user');
+        if($checkValid !=null){
+            if ($checkcode != null) {
+                /// Check If Log is Exist
+                $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
+                ->whereDate('time_in', Carbon::today())
+                ->first();
+    
+                if (!$checkPresence) {
+                    /// Create Presence Log
+                    $presence = new PresenceLog;
+                    $presence->user_id = Auth::user()->id;
+                    $presence->time_in = Carbon::now();
+    
+                    if ($presence->save()) {
+                        return redirect('user')->with('message', 'Your`e Presence was Successfully!');
+                        // return redirect('user');
+                    }
+                } else {
+                    return redirect('user')->with('message', 'You already have a presence today!');
                 }
             } else {
-                return redirect('user')->with('message', 'You already have a presence today!');
+                return redirect()->back()->with('message', 'Your`e Code not match!');
             }
-        } else {
-            return redirect()->back()->with('message', 'Your`e Code not match!');
+        }
+        else{
+            return redirect()->back()->with('message', 'Please contact Admin for get presence. 
+            Because you dont have presence out yesterday!');
         }
     }
 
@@ -64,6 +70,42 @@ class UserController extends Controller
 
     public function presenceOut()
     {
+        $request->validate([
+            'code'  => 'required|min:4|max:8'
+        ]);
+
+        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(10))->first();
+
+        $checkValid = PresenceLog::where('user_id', Auth::user()->id)
+            ->whereDate('time_in', Carbon::today());
+
+        if($checkValid !=null){
+            if ($checkcode != null) {
+                /// Check If Log is Exist
+                $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
+                ->whereDate('time_out', Carbon::today())
+                ->first();
+    
+                if (!$checkPresence) {
+                    /// Create Presence Log
+                    $presence = new PresenceLog;
+                    $presence->user_id = Auth::user()->id;
+                    $presence->time_out = Carbon::now();
+    
+                    if ($presence->save()) {
+                        return redirect('user')->with('message', 'Your`e Presence was Successfully!');
+                        // return redirect('user');
+                    }
+                } else {
+                    return redirect('user')->with('message', 'You already have a presence today!');
+                }
+            } else {
+                return redirect()->back()->with('message', 'Your`e Code not match!');
+            }
+        }
+        else{
+            return redirect()->back()->with('message', 'You dont have presence in today!');
+        }
     }
 
     public function showProfile()

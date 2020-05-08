@@ -20,9 +20,21 @@
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
+                                    <td>Adikara Rudi</td>
+                                    <td>16 March 2020</td>
+                                    <td>Hasn't presence out.</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Vera Uyainah</td>
+                                    <td>16 March 2020</td>
+                                    <td>Hasn't presence out.</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Gasti Yuliarti</td>
+                                    <td>16 March 2020</td>
+                                    <td>Hasn't presence out.</td>
                                 </tr>
                             </tbody>
                         </table>

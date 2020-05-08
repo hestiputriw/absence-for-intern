@@ -17,7 +17,7 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                @foreach ($users as $key => $user)
+                                {{-- @foreach ($users as $key => $user)
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
@@ -25,7 +25,28 @@
                                             <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
                                         </td>
                                     </tr>
-                                @endforeach
+                                @endforeach --}}
+                                <tr>
+                                    <td>1</td>
+                                    <td>Adikara Rudi </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Vera Uyainah </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>Gasti Yuliarti </td>
+                                    <td>
+                                        <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") }}" role="button">Access</a> 
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

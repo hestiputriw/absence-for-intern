@@ -100,7 +100,7 @@
                                         <p>Violations</p>
                                     </a>
                                 </li>
-                                <li class="@if(request()->is('admin/presence/violation-log')) active  @endif">
+                                <li class="@if(request()->is('admin/presence/violation-logs')) active  @endif">
                                     <a href="{{ url("admin/presence/violation-logs") }}">
                                         <i class="fa fa-file-text"></i>
                                         <p>Violation Logs</p>
@@ -184,7 +184,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">All Users</p>
-                                            <p class="card-title">150GB</p>
+                                            <p class="card-title">{{ Auth::user()->where('role', 'user')->count() }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -211,8 +211,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Presence</p>
-                                            <p class="card-title">$ 1,345
-                                                <p>
+                                            <p class="card-title">0<p>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +238,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Statistic</p>
-                                            <p class="card-title">23</p>
+                                            <p class="card-title">23 %</p>
                                         </div>
                                     </div>
                                 </div>
@@ -266,7 +265,7 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Violation Logs</p>
-                                            <p class="card-title">+45K</p>
+                                            <p class="card-title">3</p>
                                         </div>
                                     </div>
                                 </div>

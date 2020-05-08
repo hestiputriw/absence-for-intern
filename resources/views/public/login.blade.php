@@ -15,6 +15,7 @@
                 <strong>{{ $message }}</strong>
             </span>
             @enderror
+            <br>
 
             <label>Password</label>
             <input type="password" class="form-control" placeholder="Password" id="password" name="password">

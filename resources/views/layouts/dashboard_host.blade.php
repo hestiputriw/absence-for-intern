@@ -21,7 +21,7 @@
     </title>
 </head>
 
-<body>
+<body onload=display_ct();>
     <nav class="navbar navbar-ct-primary" role="navigation-demo" id="demo-navbar">
         <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,11 +35,8 @@
             <div class="collapse navbar-collapse" id="navigation-example-2">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-nav navbar-right">
-                        <p class="text-danger">
-                            <?php
-                                date_default_timezone_set("Asia/Jakarta");
-                                echo date("d-m-Y h:i:s");
-                            ?>
+                        <p class="btn btn-danger btn-fill">
+                            <span id='ct' ></span>
                         </p>
                     </li>
                 </ul>
@@ -54,7 +51,6 @@
                     <div class="row justify-content-md-center">
                         <div class="col-md-4 col-md-offset-4 text-center">
                             @yield('content')
-                            <img src="{{ asset('img/qrcode.png') }}" alt="Rounded Image" class="img-rounded img-responsive">
                         </div>
                     </div>
                 </div>
@@ -64,7 +60,7 @@
                     <div class="row justify-content-md-center">
                         <div class="col-md-8 col-md-offset-2 text-center">
                             <p class="line">Please scan the QRCode for your presence.<p>
-                            <p class="line">The QRCode will be replace in every 5 seconds.</p><br>
+                            <p class="line">The QRCode will be replace in every 10 seconds.</p><br>
                             <p class="line">Thank you!</p><br>
                         </div>
                     </div>
@@ -86,4 +82,49 @@
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
 
     <script src="{{ asset('js/ct-paper.js') }} "></script>
+
+    <script type="text/javascript"> 
+        function display_c(){
+        var refresh=1000; // Refresh rate in milli seconds
+        mytime=setTimeout('display_ct()',refresh)
+        }
+        
+        function display_ct() {
+        var date = new Date()
+        var tahun = date.getFullYear();
+        var bulan = date.getMonth();
+        var tanggal = date.getDate();
+        var hari = date.getDay();
+        var jam = date.getHours();
+        var menit = date.getMinutes();
+        var detik = date.getSeconds();
+        switch(hari) {
+            case 0: hari = "Sun"; break;
+            case 1: hari = "Mon"; break;
+            case 2: hari = "Tues"; break;
+            case 3: hari = "Wed"; break;
+            case 4: hari = "Thurs"; break;
+            case 5: hari = "Fri"; break;
+            case 6: hari = "Sat"; break;
+        }
+        switch(bulan) {
+            case 0: bulan = "Jan"; break;
+            case 1: bulan = "Feb"; break;
+            case 2: bulan = "Mar"; break;
+            case 3: bulan = "Apr"; break;
+            case 4: bulan = "May"; break;
+            case 5: bulan = "Jun"; break;
+            case 6: bulan = "Jul"; break;
+            case 7: bulan = "Aug"; break;
+            case 8: bulan = "Sept"; break;
+            case 9: bulan = "Oct"; break;
+            case 10: bulan = "Nov"; break;
+            case 11: bulan = "Dec"; break;
+        }
+        var x1 = hari + ", " + tanggal + " " + bulan + " " + tahun + " " + jam + ":" + menit + ":" + detik;
+
+        document.getElementById('ct').innerHTML = x1;
+            display_c();
+        }
+    </script>
 </html>

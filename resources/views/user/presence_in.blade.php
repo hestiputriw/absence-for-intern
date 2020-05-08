@@ -42,6 +42,7 @@
     </form>
 </div>
 @endsection
+
 @section('js')
 <script type="text/javascript" src="{{ asset('js/qrscan/qrcodelib.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/qrscan/webcodecamjquery.js') }}"></script>
@@ -50,13 +51,13 @@
         frameRate: 25,
         DecodeQRCodeRate: 2,
         flipHorizontal: true,
-        beep: 'http://192.168.1.9:8000/sound/beep.mp3',
+        beep: 'http://192.168.1.4:8000/sound/beep.mp3',
         autoBrightnessValue: 0,
         // contrast: 200,
         grayScale: true,
         zoom: 1,
         width: 320,
-        height: 240,
+        height: 300,
         threshold: 500,
         resultFunction: function(result) {
             $('#code').val(result.code)

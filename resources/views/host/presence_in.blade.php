@@ -2,5 +2,6 @@
 @section('title', 'Presence In')
 
 @section('content')
- {{ $randomletter }}
+    {{-- {{ $qrcode }} --}}
+    {!! QrCode::size(300)->generate($randomletter) !!}
 @endsection
