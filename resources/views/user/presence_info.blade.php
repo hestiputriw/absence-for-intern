@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td>{{ $key+1 }}</td>
                                                 <td>{{ $presence->time_in }}</td>
-                                                <td> </td>
+                                                <td>{{ $presence->time_out }}</td>
                                                 {{-- <td>{{ $presence->time_out }}</td> --}}
                                             </tr>
                                         @endforeach

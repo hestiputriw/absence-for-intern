@@ -15,7 +15,7 @@ class AdminPresenceController extends Controller
     }
 
     public function showStatistic(){
-        $users = User::all();
+        $users = User::all()->where('role', 'user');
 
         return view('admin/presence_statistic')->with(compact('users'));
     }
@@ -28,16 +28,18 @@ class AdminPresenceController extends Controller
     }
 
     public function showViolations(){
-        $users = DB::table('users')
-                ->join('presence_logs', function ($join) {
-                    $join->on('users.id', '=', 'presence_logs.user_id')
-                        ->where('presence_logs.time_in', '!=', Carbon::now());
-                })
-                ->get();
-        return view('admin/violations')->with(compact('users'));
+        return view('admin/violations');
     }
 
     public function showViolationLogs(){
         return view('admin/violation_log');
+    }
+
+    public function showAccess(){
+
+    }
+
+    public function access(){
+
     }
 }

@@ -25,10 +25,10 @@
                                 @endforeach
                                 @foreach ($presences as $key => $presence)
                                         <td>{{ $presence->time_in }}</td>
-                                        <td> </td>
+                                        <td>{{ $presence->time_out }}</td>
                                         {{-- <td>{{ $presence->time_out }}</td> --}}
                                     </tr>
-                            @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

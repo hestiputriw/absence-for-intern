@@ -12,10 +12,6 @@ class AdminUserController extends Controller
         return view('admin/user');
     }
 
-    public function showValidateUser($id)
-    {
-    }
-
     public function validateUser($id)
     {
         User::findOrFail($id)->update(['validated' => 1]);
@@ -74,5 +70,7 @@ class AdminUserController extends Controller
 
     public function deleteUser($id)
     {
+        User::findOrFail($id)->delete();
+        return redirect()->back();
     }
 }

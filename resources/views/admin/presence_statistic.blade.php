@@ -23,7 +23,7 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td> </td>
+                                        <td></td>
                                         <td> </td>
                                         <td> </td>
                                     </tr>
