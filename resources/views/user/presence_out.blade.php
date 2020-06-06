@@ -1,5 +1,5 @@
 @extends('layouts.dashboard_user')
-@section('title', 'Presence Out')
+@section('title', 'Presence In')
 
 @section('content')
 <div class="wrapper">
@@ -26,10 +26,14 @@
                         <h2>Scan QR Code</h2>
                     </div>
                 </div>
-                <div class="row align-content-center">
-                    <div class="col-md-12">
-                        <canvas></canvas>
-                        <ul></ul>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video class="embed-responsive-item" id="preview"></video>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -44,34 +48,23 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{ asset('js/qrscan/qrcodelib.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/qrscan/webcodecamjquery.js') }}"></script>
-<script>
-    var args = {
-        frameRate: 25,
-        DecodeQRCodeRate: 2,
-        flipHorizontal: true,
-        beep: 'http://192.168.1.4:8000/sound/beep.mp3',
-        autoBrightnessValue: 0,
-        // contrast: 200,
-        grayScale: true,
-        zoom: 1,
-        width: 320,
-        height: 300,
-        threshold: 500,
-        resultFunction: function(result) {
-            $('#code').val(result.code)
-            $('#submit').click()
-            }
-        };
-        var decoder = $("canvas").WebCodeCamJQuery(args).data().plugin_WebCodeCamJQuery;
-        // decoder.buildSelectMenu("select");
-        decoder.play();
-        /*  Without visible select menu
-            decoder.buildSelectMenu(document.createElement('select'), 'environment|back').init(arg).play();
-        */
-        $('select').on('change', function(){
-            decoder.stop().play();
-        })
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+<script type="text/javascript">
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+        $('#code').val(content)
+        $('#submit').click()
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.log('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
 </script>
+
 @endsection
