@@ -27,16 +27,15 @@ class UserController extends Controller
         $request->validate([
             'code'  => 'required|min:4|max:8'
         ]);
+        $checkValid = PresenceLog::findOrFail(Auth::user()->id)
+        ->whereDate('time_out', Carbon::yesterday());
 
         $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
-
-        $checkValid = PresenceLog::where('user_id', Auth::user()->id)
-            ->whereDate('time_out', Carbon::yesterday());
 
         if($checkValid !=null){
             if ($checkcode != null) {
                 /// Check If Log is Exist
-                $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
+                $checkPresence = PresenceLog::findOrFail(Auth::user()->id)
                 ->whereDate('time_in', Carbon::today())
                 ->first();
     
