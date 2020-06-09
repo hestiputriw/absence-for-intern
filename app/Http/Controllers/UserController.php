@@ -33,14 +33,16 @@ class UserController extends Controller
 
         if($checkViolence->presences()->whereDate('time_in', '<', Carbon::today())->exists()){
             $lastViolence = $checkViolence->presences->where('time_in', '<', Carbon::today())->last();
+            $violencesExists = $checkViolence->violations()->exists();
+            // dd($violencesExists);
             if($lastViolence->time_out == null){
-                if(User::find(Auth::user()->id)->violations()->whereDate('violation_date', $lastViolence->time_in)->exists()){
-                    dd('yes');
+                if(!$violencesExists ||!Carbon::create(User::find(Auth::user()->id)->violations->last()->violation_date)
+                ->isSameDay($lastViolence->time_in)){
+                    $violation = new Violation;
+                    $violation->user_id = Auth::user()->id;
+                    $violation->violation_date = $lastViolence->time_in;
+                    $violation->save();
                 }
-                dd('not');
-                $violation = new Violation;
-                $violation->user_id = Auth::user()->id;
-                $violation->violation_date = $lastViolence->time_in;
                 return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
             }
         }
