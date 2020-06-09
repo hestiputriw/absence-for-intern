@@ -20,6 +20,8 @@ class UserController extends Controller
 
     public function showPresenceIn()
     {
+        $this->validateUser();
+
         return view('user/presence_in');
     }
 
@@ -29,7 +31,10 @@ class UserController extends Controller
             'code'  => 'required|min:4|max:8'
         ]);
 
-        $this->violationCheck();
+        if(!$this->violationCheck())
+        {
+            return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+        }
 
         $checkcode = UsersPresenceCode::where('code', $request->code)->first();
         // $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
@@ -61,6 +66,8 @@ class UserController extends Controller
 
     public function showPresenceOut()
     {
+        $this->validateUser();
+
         return view('user/presence_out');
     }
 
@@ -68,39 +75,38 @@ class UserController extends Controller
     {
         $request->validate([
             'code'  => 'required|min:4|max:8'
-        ]);
-
-        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(10))->first();
-
-        $checkValid = PresenceLog::where('user_id', Auth::user()->id)
-            ->whereDate('time_in', Carbon::today());
-
-        if($checkValid !=null){
+            ]);
+            
+            if(!$this->violationCheck())
+            {
+                return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+            }
+            
+            $checkcode = UsersPresenceCode::where('code', $request->code)->first();
+            // $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(10))->first();
+            
             if ($checkcode != null) {
                 /// Check If Log is Exist
-                $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
+                $checkPresence = User::findOrFail(Auth::user()->id)
+                ->presences()
                 ->whereDate('time_out', Carbon::today())
                 ->first();
-
+                
                 if (!$checkPresence) {
                     /// Create Presence Log
-                    $presence = new PresenceLog;
-                    $presence->user_id = Auth::user()->id;
+                    $presence = User::findOrFail(Auth::user()->id)->presences->last();
                     $presence->time_out = Carbon::now();
+                    // dd('berhasil');
 
-                    if ($presence->save()) {
-                        return redirect('user')->with('message', 'Your`e Presence was Successfully!');
-                        // return redirect('user');
-                    }
-                } else {
-                    return redirect('user')->with('message', 'You already have a presence today!');
+                if ($presence->save()) {
+                    return redirect('user')->with('success', 'Your`e Presence was Successfully!');
+                    // return redirect('user');
                 }
             } else {
-                return redirect()->back()->with('message', 'Your`e Code not match!');
+                return redirect('user')->with('error', 'You already have a presence today!');
             }
-        }
-        else{
-            return redirect()->back()->with('message', 'You dont have presence in today!');
+        } else {
+            return redirect()->back()->with('error', 'Your`e Code not match!');
         }
     }
 
@@ -185,8 +191,18 @@ class UserController extends Controller
                     $violation->violation_date = $lastViolation->time_in;
                     $violation->save();
                 }
-                return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+                return false;
             }
+        }
+        return true;
+    }
+
+    public function validateUser()
+    {       
+        $validate = Auth::user()->validated;
+
+        if(!$validate){
+            return redirect('user')->with('error', 'Please, contact admin to validate Account!');
         }
     }
 }

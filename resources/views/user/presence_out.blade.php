@@ -1,5 +1,5 @@
 @extends('layouts.dashboard_user')
-@section('title', 'Presence In')
+@section('title', 'Presence Out')
 
 @section('content')
 <div class="wrapper">

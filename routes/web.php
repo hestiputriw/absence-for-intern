@@ -62,7 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
         Route::get('/day', 'AdminPresenceController@statisticDay');
         Route::get('/violations', 'AdminPresenceController@showViolations');
         // Route::get('/violations/access', 'AdminPresenceController@showAccess');
-        Route::get('/violations/access/{id}', 'AdminPresenceController@access');
+        Route::get('/violations/{id}', 'AdminPresenceController@violationAccess');
         Route::get('/violation-logs', 'AdminPresenceController@showViolationLogs');
     });
 

@@ -30,8 +30,9 @@ class AdminPresenceController extends Controller
     }
 
     public function showViolations(){
-        $date = Carbon::now()->subDays(1);
-        $users = User::all()->presences()->where('time_out', $date)->get();
+        $users = User::whereHas('violations', function($query){
+            $query->where('access', 0);
+        })->get();
 
         return view('admin/violations')->with(compact('users'));
     }
@@ -43,8 +44,9 @@ class AdminPresenceController extends Controller
         return view('admin/violation_log')->with(compact('users'));
     }
 
-    public function access($id){
-        // User::findOrFail($id)->update(['validated' => 0]);
+    public function violationAccess($id){
+        User::findOrFail($id)->violations()->update(['access' => 1]);
+        
         return redirect()->back();
     }
 }

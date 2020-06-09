@@ -25,30 +25,32 @@
             </div>
         </div>
     </div>
-    <div class="main">
-        <div class="section text-center landing-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h3>Choose Your Presence</h3>
-                        <br>
+    @if (Auth::user()->validated)
+        <div class="main">
+            <div class="section text-center landing-section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h3>Choose Your Presence</h3>
+                            <br>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-3 col-sm-12 mx-auto">
-                        <img src="{{ asset('img/presin.png') }}" alt="Rounded Image" class="img-rounded img-responsive">
-                        <br>
-                        <a href="{{ url("user/presence/in") }}" class="btn btn-fill btn-info">Presence In</a>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <img src="{{ asset('img/presout.png') }}" alt="Rounded Image"
-                            class="img-rounded img-responsive">
-                        <br>
-                        <a href="{{ url("user/presence/out") }}" class="btn btn-fill btn-info">Presence Out</a>
+                    <div class="row justify-content-center">
+                        <div class="col-md-3 col-sm-12 mx-auto">
+                            <img src="{{ asset('img/presin.png') }}" alt="Rounded Image" class="img-rounded img-responsive">
+                            <br>
+                            <a href="{{ url("user/presence/in") }}" class="btn btn-fill btn-info">Presence In</a>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <img src="{{ asset('img/presout.png') }}" alt="Rounded Image"
+                                class="img-rounded img-responsive">
+                            <br>
+                            <a href="{{ url("user/presence/out") }}" class="btn btn-fill btn-info">Presence Out</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endif
 </div>
 @endsection

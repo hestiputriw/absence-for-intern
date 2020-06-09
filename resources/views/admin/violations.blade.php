@@ -14,6 +14,7 @@
                             <thead class="text-primary">
                                 <th>ID</th>
                                 <th>Name</th>
+                                <th>Violation Date</th>
                                 <th>Action</th>
                             </thead>
                             <tbody>
@@ -21,8 +22,9 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->violations->last()->violation_date }}</td>
                                         <td>
-                                            <a class="btn btn-primary" href="{{ url("admin/presence/violations/access") .'/'. $user->id}}" role="button">Access</a> 
+                                            <a class="btn btn-primary" href="{{ url("admin/presence/violations") .'/'. $user->id }}" role="button">Access</a> 
                                         </td>
                                     </tr>
                                 @endforeach
