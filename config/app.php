@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...

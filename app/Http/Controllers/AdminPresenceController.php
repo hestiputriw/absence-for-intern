@@ -45,8 +45,16 @@ class AdminPresenceController extends Controller
     }
 
     public function violationAccess($id){
-        User::findOrFail($id)->violations()->update(['access' => 1]);
-        
+        $user = User::findOrFail($id);
+        $last_presence = $user->presences->last();
+        $last_violation = $user->violations->last();
+
+        $last_violation->access = 1;
+        $last_violation->save();
+
+        $last_presence->time_out = Carbon::parse($last_presence->time_in)->addHours(6);
+        $last_presence->save();
+
         return redirect()->back();
     }
 }
