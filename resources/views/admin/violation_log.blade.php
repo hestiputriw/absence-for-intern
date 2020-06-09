@@ -22,7 +22,6 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td> Desc</td>
                                     </tr>
                                 @endforeach
                                 {{-- <tr>

@@ -57,7 +57,7 @@
 }
 
 .register-background {
-    background-image: url("../img/background.png");
+    background-image: url("../img/background.jpg");
     background-position: center center;
     background-size: cover;
     min-height: 100vh;
@@ -125,7 +125,7 @@
 }
 
 .profile-background {
-    background-image: url("../img/background.png");
+    background-image: url("../img/background.jpg");
     background-position: center center;
     background-size: cover;
     height: 450px;

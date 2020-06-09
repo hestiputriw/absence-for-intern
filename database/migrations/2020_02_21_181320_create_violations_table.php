@@ -19,7 +19,8 @@ class CreateViolationsTable extends Migration
             $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
-            $table->string('description', 255);
+            $table->date('violation_date')->nullable();
+            $table->boolean('access')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
