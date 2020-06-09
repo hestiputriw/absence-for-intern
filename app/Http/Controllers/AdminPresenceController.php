@@ -22,8 +22,11 @@ class AdminPresenceController extends Controller
 
     public function statisticDay(){
         $date = Carbon::now();
-        $users = User::where('role', 'user')->presences()->where('time_in', $date);
+        $users = User::whereHas('presences', function($query){
+            $query->whereDate('time_in', Carbon::today());
+        })->get();
 
+        // dd($users);
         return view('admin/presence_day')->with(compact('users'));
     }
 
@@ -37,7 +40,7 @@ class AdminPresenceController extends Controller
     public function showViolationLogs(){
         $date = Carbon::now();
         $users = User::all()->presences()->where('time_out', $date)->get();
-        
+
         return view('admin/violation_log')->with(compact('users'));
     }
 
