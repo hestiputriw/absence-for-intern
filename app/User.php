@@ -81,7 +81,8 @@ class User extends Authenticatable
     {
         $start = Carbon::parse($this->start_working_date);
         $end = Carbon::parse(Carbon::now());
-        $totalDay += $end->diffInDays($start);
+
+        $totalDay = $end->diffInDays($start);
 
         return $totalDay;
     }
@@ -89,6 +90,11 @@ class User extends Authenticatable
 
     public function hourPercentage()
     {
+        if($this->totalDay() == 0)
+        {
+            return 0;
+        }
+
         $workHour = $this->workHour();
         $totalHour = $this->totalDay()*8;
 
@@ -98,6 +104,11 @@ class User extends Authenticatable
 
     public function presencePercentage()
     {
+        if($this->totalDay() == 0)
+        {
+            return 0;
+        }
+
         $workDay = $this->workDay();
         $totalDay = $this->totalDay();
         $presencePercen = ($workDay/$totalDay)*100;
@@ -107,8 +118,13 @@ class User extends Authenticatable
 
     public function totalViolations()
     {
-        $user_logs = $this->presences();
+        $user_logs = $this->presences()->where('time_out', Carbon::now()->subDays(1))->get();
         $violation = 0;
+
+        if($user_logs != NULL)
+        {
+            return 0;
+        }
 
         foreach ($user_logs as $user_log) {
             $violation += 1;

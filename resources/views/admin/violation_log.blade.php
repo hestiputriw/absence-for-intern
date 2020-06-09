@@ -18,7 +18,14 @@
                                 <th>Description</th>
                             </thead>
                             <tbody>
-                                <tr>
+                                @foreach ($users as $key => $user)
+                                    <tr>
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td> Desc</td>
+                                    </tr>
+                                @endforeach
+                                {{-- <tr>
                                     <td>1</td>
                                     <td>Adikara Rudi</td>
                                     <td>16 March 2020</td>
@@ -35,7 +42,7 @@
                                     <td>Gasti Yuliarti</td>
                                     <td>16 March 2020</td>
                                     <td>Hasn't presence out.</td>
-                                </tr>
+                                </tr> --}}
                             </tbody>
                         </table>
                     </div>

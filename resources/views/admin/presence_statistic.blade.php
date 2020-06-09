@@ -23,9 +23,9 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
-                                        <td></td>
-                                        <td> </td>
-                                        <td> </td>
+                                        <td>{{ $user->workHour() }}</td>
+                                        <td>{{ $user->presencePercentage() }}</td>
+                                        <td>{{ $user->totalViolations() }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

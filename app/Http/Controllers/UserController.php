@@ -166,7 +166,9 @@ class UserController extends Controller
 
     public function presenceInfo()
     {
-        $presences = PresenceLog::all();
+        $user = Auth::user()->id;
+        // $presences = PresenceLog::all();
+        $presences = User::findOrFail($user)->presences;
 
         return view('user/presence_info')->with(compact('presences'));
     }

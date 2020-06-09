@@ -22,10 +22,8 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
-                                @endforeach
-                                @foreach ($presences as $key => $presence)
-                                        <td>{{ $presence->time_in }}</td>
-                                        <td>{{ $presence->time_out }}</td>
+                                        <td>{{ $user->presences()->time_in->last() }}</td>
+                                        <td>{{ $user->presences()->time_out->last() }}</td>
                                         {{-- <td>{{ $presence->time_out }}</td> --}}
                                     </tr>
                                 @endforeach

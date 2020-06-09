@@ -211,7 +211,9 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Presence</p>
-                                            <p class="card-title">0<p>
+                                            <p class="card-title">
+                                                0{{-- {{ Auth::user()->where('role', 'user')->presences()->where('time_in', Carbon::now())->last()->count() }} --}}
+                                            <p>
                                         </div>
                                     </div>
                                 </div>
@@ -265,7 +267,9 @@
                                     <div class="col-7 col-md-8">
                                         <div class="numbers">
                                             <p class="card-category">Violation Logs</p>
-                                            <p class="card-title">3</p>
+                                            <p class="card-title">
+                                                3{{-- {{ $users->totalViolations()->count() }} --}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

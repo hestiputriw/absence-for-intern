@@ -21,25 +21,28 @@ class AdminPresenceController extends Controller
     }
 
     public function statisticDay(){
-        $users = User::all()->where('role', 'user');
-        $presences = PresenceLog::all()->where('time_in', Carbon::now());
+        $date = Carbon::now();
+        $users = User::where('role', 'user')->presences()->where('time_in', $date);
 
-        return view('admin/presence_day')->with(compact('users', 'presences'));
+        return view('admin/presence_day')->with(compact('users'));
     }
 
     public function showViolations(){
-        return view('admin/violations');
+        $date = Carbon::now()->subDays(1);
+        $users = User::all()->presences()->where('time_out', $date)->get();
+
+        return view('admin/violations')->with(compact('users'));
     }
 
     public function showViolationLogs(){
-        return view('admin/violation_log');
+        $date = Carbon::now();
+        $users = User::all()->presences()->where('time_out', $date)->get();
+        
+        return view('admin/violation_log')->with(compact('users'));
     }
 
-    public function showAccess(){
-
-    }
-
-    public function access(){
-
+    public function access($id){
+        // User::findOrFail($id)->update(['validated' => 0]);
+        return redirect()->back();
     }
 }
