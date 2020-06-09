@@ -3,7 +3,7 @@
 
 @section('content')
 <div class="wrapper">
-    <div class="landing-header" style="background-image: url('../img/background.png');">
+    <div class="landing-header" style="background-image: url('../img/background.jpg');">
         <div class="container tim-container">
             <div class="motto">
                 <h1 class="title-uppercase mtom">Hello, </h1>
