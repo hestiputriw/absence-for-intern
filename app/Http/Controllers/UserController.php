@@ -27,8 +27,13 @@ class UserController extends Controller
         $request->validate([
             'code'  => 'required|min:4|max:8'
         ]);
-        $checkValid = PresenceLog::findOrFail(Auth::user()->id)
-        ->whereDate('time_out', Carbon::yesterday());
+
+        $checkValid = User::findOrFail(Auth::user()->id);
+        if($checkValid->presences()->exists()){
+            if(!$checkValid->presences->last()->time_out){
+                return redirect()->back()->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+            }
+        }
 
         $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
 
@@ -38,26 +43,26 @@ class UserController extends Controller
                 $checkPresence = PresenceLog::findOrFail(Auth::user()->id)
                 ->whereDate('time_in', Carbon::today())
                 ->first();
-    
+
                 if (!$checkPresence) {
                     /// Create Presence Log
                     $presence = new PresenceLog;
                     $presence->user_id = Auth::user()->id;
                     $presence->time_in = Carbon::now();
-    
+
                     if ($presence->save()) {
-                        return redirect('user')->with('message', 'Your`e Presence was Successfully!');
+                        return redirect('user')->with('success', 'Your`e Presence was Successfully!');
                         // return redirect('user');
                     }
                 } else {
-                    return redirect('user')->with('message', 'You already have a presence today!');
+                    return redirect('user')->with('error', 'You already have a presence today!');
                 }
             } else {
-                return redirect()->back()->with('message', 'Your`e Code not match!');
+                return redirect()->back()->with('error', 'Your`e Code not match!');
             }
         }
         else{
-            return redirect()->back()->with('message', 'Please contact Admin for get presence. 
+            return redirect()->back()->with('error', 'Please contact Admin for get presence.
             Because you dont have presence out yesterday!');
         }
     }
@@ -67,7 +72,7 @@ class UserController extends Controller
         return view('user/presence_out');
     }
 
-    public function presenceOut()
+    public function presenceOut(Request $request)
     {
         $request->validate([
             'code'  => 'required|min:4|max:8'
@@ -84,13 +89,13 @@ class UserController extends Controller
                 $checkPresence = PresenceLog::where('user_id', Auth::user()->id)
                 ->whereDate('time_out', Carbon::today())
                 ->first();
-    
+
                 if (!$checkPresence) {
                     /// Create Presence Log
                     $presence = new PresenceLog;
                     $presence->user_id = Auth::user()->id;
                     $presence->time_out = Carbon::now();
-    
+
                     if ($presence->save()) {
                         return redirect('user')->with('message', 'Your`e Presence was Successfully!');
                         // return redirect('user');

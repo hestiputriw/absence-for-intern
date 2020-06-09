@@ -26,7 +26,6 @@ class AdminPresenceController extends Controller
             $query->whereDate('time_in', Carbon::today());
         })->get();
 
-        // dd($users);
         return view('admin/presence_day')->with(compact('users'));
     }
 

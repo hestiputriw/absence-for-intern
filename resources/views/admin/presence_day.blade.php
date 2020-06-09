@@ -24,7 +24,6 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->presences->last()->time_in }}</td>
                                 <td>{{ $user->presences->last()->time_out }}</td>
-                                {{-- <td>{{ $presence->time_out }}</td> --}}
                             </tr>
                             @endforeach
                         </tbody>
