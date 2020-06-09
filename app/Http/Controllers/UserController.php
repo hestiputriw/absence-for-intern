@@ -29,23 +29,7 @@ class UserController extends Controller
             'code'  => 'required|min:4|max:8'
         ]);
 
-        $checkViolence = User::findOrFail(Auth::user()->id);
-
-        if($checkViolence->presences()->whereDate('time_in', '<', Carbon::today())->exists()){
-            $lastViolence = $checkViolence->presences->where('time_in', '<', Carbon::today())->last();
-            $violencesExists = $checkViolence->violations()->exists();
-            // dd($violencesExists);
-            if($lastViolence->time_out == null){
-                if(!$violencesExists ||!Carbon::create(User::find(Auth::user()->id)->violations->last()->violation_date)
-                ->isSameDay($lastViolence->time_in)){
-                    $violation = new Violation;
-                    $violation->user_id = Auth::user()->id;
-                    $violation->violation_date = $lastViolence->time_in;
-                    $violation->save();
-                }
-                return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
-            }
-        }
+        $this->violationCheck();
 
         $checkcode = UsersPresenceCode::where('code', $request->code)->first();
         // $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
@@ -183,5 +167,26 @@ class UserController extends Controller
         $presences = User::findOrFail($user)->presences;
 
         return view('user/presence_info')->with(compact('presences'));
+    }
+
+    public function violationCheck()
+    {
+        $checkViolation = User::findOrFail(Auth::user()->id);
+
+        if($checkViolation->presences()->whereDate('time_in', '<', Carbon::today())->exists()){
+            $lastViolation = $checkViolation->presences->where('time_in', '<', Carbon::today())->last();
+            $violationExists = $checkViolation->violations()->exists();
+
+            if($lastViolation->time_out == null){
+                if(!$violationExists ||!Carbon::create(User::find(Auth::user()->id)->violations->last()->violation_date)
+                ->isSameDay($lastViolation->time_in)){
+                    $violation = new Violation;
+                    $violation->user_id = Auth::user()->id;
+                    $violation->violation_date = $lastViolation->time_in;
+                    $violation->save();
+                }
+                return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+            }
+        }
     }
 }
