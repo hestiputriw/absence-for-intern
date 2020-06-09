@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Violation;
 use App\UsersPresenceCode;
 
 class UserController extends Controller
@@ -28,43 +29,48 @@ class UserController extends Controller
             'code'  => 'required|min:4|max:8'
         ]);
 
-        $checkValid = User::findOrFail(Auth::user()->id);
-        if($checkValid->presences()->exists()){
-            if(!$checkValid->presences->last()->time_out){
-                return redirect()->back()->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
+        $checkViolence = User::findOrFail(Auth::user()->id);
+
+        if($checkViolence->presences()->whereDate('time_in', '<', Carbon::today())->exists()){
+            $lastViolence = $checkViolence->presences->where('time_in', '<', Carbon::today())->last();
+            if($lastViolence->time_out == null){
+                if(User::find(Auth::user()->id)->violations()->whereDate('violation_date', $lastViolence->time_in)->exists()){
+                    dd('yes');
+                }
+                dd('not');
+                $violation = new Violation;
+                $violation->user_id = Auth::user()->id;
+                $violation->violation_date = $lastViolence->time_in;
+                return redirect('user')->with('error', 'You have not done presence out last time !, please contact admin to complete this action');
             }
         }
 
-        $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
+        $checkcode = UsersPresenceCode::where('code', $request->code)->first();
+        // $checkcode = UsersPresenceCode::where('code', $request->code)->whereTime('created_at', '>', Carbon::now()->subSeconds(60))->first();
+        if ($checkcode != null) {
+            /// Check If Log is Exist
+            $checkPresence = User::findOrFail(Auth::user()->id)
+            ->presences()
+            ->whereDate('time_in', Carbon::today())
+            ->first();
 
-        if($checkValid !=null){
-            if ($checkcode != null) {
-                /// Check If Log is Exist
-                $checkPresence = PresenceLog::findOrFail(Auth::user()->id)
-                ->whereDate('time_in', Carbon::today())
-                ->first();
+            if (!$checkPresence) {
+                /// Create Presence Log
+                $presence = new PresenceLog;
+                $presence->user_id = Auth::user()->id;
+                $presence->time_in = Carbon::now();
 
-                if (!$checkPresence) {
-                    /// Create Presence Log
-                    $presence = new PresenceLog;
-                    $presence->user_id = Auth::user()->id;
-                    $presence->time_in = Carbon::now();
-
-                    if ($presence->save()) {
-                        return redirect('user')->with('success', 'Your`e Presence was Successfully!');
-                        // return redirect('user');
-                    }
-                } else {
-                    return redirect('user')->with('error', 'You already have a presence today!');
+                if ($presence->save()) {
+                    return redirect('user')->with('success', 'Your`e Presence was Successfully!');
+                    // return redirect('user');
                 }
             } else {
-                return redirect()->back()->with('error', 'Your`e Code not match!');
+                return redirect('user')->with('error', 'You already have a presence today!');
             }
+        } else {
+            return redirect()->back()->with('error', 'Your`e Code not match!');
         }
-        else{
-            return redirect()->back()->with('error', 'Please contact Admin for get presence.
-            Because you dont have presence out yesterday!');
-        }
+
     }
 
     public function showPresenceOut()
